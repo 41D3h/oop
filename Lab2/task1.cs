@@ -14,6 +14,5 @@ public class Program
     {
       Console.WriteLine("Число четное");
     }
-    Console.WriteLine("\nНажмите любую клавишу для продолжения...");
   }
 }
