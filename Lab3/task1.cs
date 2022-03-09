@@ -1,13 +1,11 @@
-using System;
-
 public class Program
 {
-  public static Random rnd = new Random();
+  private static Random rnd = new Random();
   public static void Main() {
-    
+    Console.Clear();
     
     //task1
-    int[] array_K = new int[25]
+    int[] arrayK = new int[]
     {
       25, -47, 96, 143, -538, 
       -72, 963, 271, -1, 321, 
@@ -16,52 +14,51 @@ public class Program
       701, -109, 375, 285, -629
     };//15 positives, 9 negatives, 1 zero
     
-    Console.WriteLine("Количество неотрицательных элементов массива K(25) = {0}\n", Positives(array_K));
-
+    Console.WriteLine("Количество неотрицательных элементов массива K(25) = {0}\n", Positives(arrayK));
+    
     //task2
-    int[] array_P = new int[30];
+    int[] arrayP = new int[30];
     Console.WriteLine("Элементы массива P(30)");
-    ArrayGenerator(array_P, 0, 256);
-
-    int max = MaxIndex(array_P);
-    Console.WriteLine("Максимальное значение в массиве = {0}, его индекс {1}\n", array_P[max], max + 1);
-
+    ArrayGenerator(arrayP, 0, 256);
+    
+    int max = MaxIndex(arrayP);
+    Console.WriteLine("Максимальное значение в массиве = {0}, его индекс {1}\n", arrayP[max], max + 1);
+    
     //task3
-    int[] array_F = new int[30];
+    int[] arrayF = new int[30];
     Console.WriteLine("Элементы массива F(30)");
-    ArrayGenerator(array_F, -512, 511);
-
-    Console.WriteLine("Первый положительный элемент = {0}\n", FirstPositive(array_F));
+    ArrayGenerator(arrayF, -512, 511);
+    
+    Console.WriteLine("Первый положительный элемент = {0}\n", FirstPositive(arrayF));
     
     //task4
-    int[] array_T = new int[20];
+    int[] arrayT = new int[20];
     Console.WriteLine("Элементы массива T(20)");
-    ArrayGenerator(array_T, -512, 511);
-
-    ReverseBubbleSort(array_T);
+    ArrayGenerator(arrayT, -512, 511);
+    
+    ReverseBubbleSort(arrayT);
     Console.WriteLine("Элементы массива T(20)");
-    DisplayArray(array_T);
+    DisplayArray(arrayT);
     
     //task5
-    int[][] array_L = new int[10][];
+    int[,] arrayL = new int[10,15];
     Console.WriteLine("Элементы массива L(10,15)");
-    for (int i = 0; i < array_L.Length; i++)
+    for (int i = 0; i < arrayL.GetLength(0); i++)
     {
-      array_L[i] = new int[15];
-      for (int j = 0; j < array_L[i].Length; j++)
+      for (int j = 0; j < arrayL.GetLength(1); j++)
       {
-        array_L[i][j] = rnd.Next(-512, 511);
-        Console.Write("{0}\t", array_L[i][j]);
+        arrayL[i, j] = rnd.Next(-512, 511);
+        Console.Write("{0}\t", arrayL[i, j]);
       }
       Console.WriteLine();
     }
 
-    RowsSwapper(array_L);
-    for (int i = 0; i < array_L.Length; i++)
+    RowsSwapper(arrayL);
+    for (int i = 0; i < arrayL.GetLength(0); i++)
     {
-      for (int j = 0; j < array_L[i].Length; j++)
+      for (int j = 0; j < arrayL.GetLength(1); j++)
       {
-        Console.Write("{0}\t", array_L[i][j]);
+        Console.Write("{0}\t", arrayL[i, j]);
       }
       Console.WriteLine();
     }
@@ -69,7 +66,7 @@ public class Program
   }
 
   //task1
-  public static int Positives(int[] numbers) {
+  private static int Positives(int[] numbers) {
     int count = 0;
     foreach (var number in numbers)
     {
@@ -80,7 +77,7 @@ public class Program
   }
 
   //task2
-  public static int MaxIndex(int[] numbers) {
+  private static int MaxIndex(int[] numbers) {
     int max = numbers[0], index = 0;
     for (int i = 1; i < numbers.Length; i++)
     {
@@ -95,17 +92,17 @@ public class Program
   }
 
   //task3
-  public static int FirstPositive(int[] numbers) {
-    for (int i = 0; i < numbers.Length; i++)
+  private static int FirstPositive(int[] numbers) {
+    foreach (var number in numbers)
     {
-      if (numbers[i] > 0) return numbers[i];
+      if (number > 0) return number;
     }
 
     return -1;
   }
   
   //task4
-  public static void ReverseBubbleSort(int[] numbers) {
+  private static void ReverseBubbleSort(int[] numbers) {
     for (int i = 1; i < numbers.Length; i++)
     {
       for (int j = 1; j < numbers.Length; j++)
@@ -121,7 +118,7 @@ public class Program
   }
 
   //task5
-  public static void RowsSwapper(int[][] numbers) {
+  private static void RowsSwapper(int[,] numbers) {
     int k, n;
     
     do
@@ -144,15 +141,15 @@ public class Program
 
     Console.WriteLine();
       
-    for (int j = 0; j < numbers[0].Length; j++)
+    for (int j = 0; j < numbers.GetLength(0); j++)
     {
-      int temp = numbers[k][j];
-      numbers[k][j] = numbers[n][j];
-      numbers[n][j] = temp;
+      int temp = numbers[k, j];
+      numbers[k, j] = numbers[n, j];
+      numbers[n, j] = temp;
     }
   }
-  
-  public static void ArrayGenerator(int[] array, int min, int max) {
+
+  private static void ArrayGenerator(int[] array, int min, int max) {
     for (int i = 0; i < array.Length; i++)
     {
       array[i] = rnd.Next(min,max);
@@ -161,7 +158,7 @@ public class Program
     DisplayArray(array);
   }
 
-  public static void DisplayArray(int[] array) {
+  private static void DisplayArray(int[] array) {
     foreach (var elem in array)
     {
       Console.Write("{0}\t", elem);
