@@ -1,11 +1,11 @@
 using System; 
 
-public class Applicant {
+class Applicant {
     private string surname;
     private string name;
     private string patronymic;
-    private string marks;
     public string address;
+    private string marks;
     public string getSurname() {
         return this.surname;
     }
@@ -67,17 +67,17 @@ public class Applicant {
     }
 
     public Applicant(string Surname = "LALALA", string Name = "TALALA", string Patron = "KEKW", string Address = "OMEGALUL", string Marks = "5445354") {
-        setSurname(Surname);
-        setName(Name);
-        setPatronymic(Patron);
-        setAddress(Address);
-        setMarks(Marks);
+        this.surname = Surname;
+        this.name = Name;
+        this.patronymic = Patron;
+        this.address = Address;
+        this.marks = Marks;
     }
 }
 
 public class Program {
   public static void Main() {
-      Appplicant test = new Appplicant();
+      Applicant test = new Applicant();
 
       Console.Write(test.getSurname());
   }
